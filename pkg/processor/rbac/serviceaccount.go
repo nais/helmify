@@ -2,8 +2,8 @@ package rbac
 
 import (
 	"fmt"
-	"github.com/arttor/helmify/pkg/helmify"
-	yamlformat "github.com/arttor/helmify/pkg/yaml"
+	"github.com/hfuss/helmify/pkg/helmify"
+	yamlformat "github.com/hfuss/helmify/pkg/yaml"
 	"github.com/iancoleman/strcase"
 	"io"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"

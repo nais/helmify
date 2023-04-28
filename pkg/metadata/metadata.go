@@ -2,10 +2,10 @@ package metadata
 
 import (
 	"fmt"
-	"github.com/arttor/helmify/pkg/config"
+	"github.com/hfuss/helmify/pkg/config"
 	"strings"
 
-	"github.com/arttor/helmify/pkg/helmify"
+	"github.com/hfuss/helmify/pkg/helmify"
 	"github.com/sirupsen/logrus"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/runtime/schema"

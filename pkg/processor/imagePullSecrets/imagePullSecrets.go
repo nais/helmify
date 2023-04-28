@@ -1,6 +1,6 @@
 package imagePullSecrets
 
-import "github.com/arttor/helmify/pkg/helmify"
+import "github.com/hfuss/helmify/pkg/helmify"
 
 const helmExpression = "{{ .Values.imagePullSecrets | default list | toJson }}"
 

@@ -6,12 +6,12 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/arttor/helmify/pkg/cluster"
-	"github.com/arttor/helmify/pkg/processor"
-	"github.com/arttor/helmify/pkg/processor/imagePullSecrets"
+	"github.com/hfuss/helmify/pkg/cluster"
+	"github.com/hfuss/helmify/pkg/processor"
+	"github.com/hfuss/helmify/pkg/processor/imagePullSecrets"
 
-	"github.com/arttor/helmify/pkg/helmify"
-	yamlformat "github.com/arttor/helmify/pkg/yaml"
+	"github.com/hfuss/helmify/pkg/helmify"
+	yamlformat "github.com/hfuss/helmify/pkg/yaml"
 	"github.com/iancoleman/strcase"
 	"github.com/pkg/errors"
 	appsv1 "k8s.io/api/apps/v1"
