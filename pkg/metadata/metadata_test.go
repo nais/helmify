@@ -2,10 +2,10 @@ package metadata
 
 import (
 	"fmt"
-	"github.com/arttor/helmify/pkg/config"
+	"github.com/hfuss/helmify/pkg/config"
 	"testing"
 
-	"github.com/arttor/helmify/internal"
+	"github.com/hfuss/helmify/internal"
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 )

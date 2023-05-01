@@ -6,7 +6,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/arttor/helmify/pkg/processor"
+	"github.com/hfuss/helmify/pkg/processor"
 
 	"github.com/arttor/helmify/pkg/helmify"
 	yamlformat "github.com/arttor/helmify/pkg/yaml"
