@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/arttor/helmify/pkg/cluster"
-	"github.com/arttor/helmify/pkg/helmify"
-	securityContext "github.com/arttor/helmify/pkg/processor/security-context"
+	"github.com/hfuss/helmify/pkg/cluster"
+	"github.com/hfuss/helmify/pkg/helmify"
+	securityContext "github.com/hfuss/helmify/pkg/processor/security-context"
 	"github.com/iancoleman/strcase"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"

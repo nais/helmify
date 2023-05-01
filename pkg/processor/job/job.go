@@ -2,10 +2,10 @@ package job
 
 import (
 	"fmt"
-	"github.com/arttor/helmify/pkg/helmify"
-	"github.com/arttor/helmify/pkg/processor"
-	"github.com/arttor/helmify/pkg/processor/pod"
-	yamlformat "github.com/arttor/helmify/pkg/yaml"
+	"github.com/hfuss/helmify/pkg/helmify"
+	"github.com/hfuss/helmify/pkg/processor"
+	"github.com/hfuss/helmify/pkg/processor/pod"
+	yamlformat "github.com/hfuss/helmify/pkg/yaml"
 	"github.com/iancoleman/strcase"
 	"github.com/pkg/errors"
 	"io"

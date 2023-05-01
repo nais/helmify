@@ -1,8 +1,8 @@
 package job
 
 import (
-	"github.com/arttor/helmify/internal"
-	"github.com/arttor/helmify/pkg/metadata"
+	"github.com/hfuss/helmify/internal"
+	"github.com/hfuss/helmify/pkg/metadata"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

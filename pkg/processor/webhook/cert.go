@@ -6,8 +6,8 @@ import (
 	"io"
 	"strings"
 
-	"github.com/arttor/helmify/pkg/helmify"
-	yamlformat "github.com/arttor/helmify/pkg/yaml"
+	"github.com/hfuss/helmify/pkg/helmify"
+	yamlformat "github.com/hfuss/helmify/pkg/yaml"
 	"github.com/hfuss/helmify/pkg/cluster"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"

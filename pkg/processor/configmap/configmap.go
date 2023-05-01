@@ -1,15 +1,15 @@
 package configmap
 
 import (
-	"github.com/arttor/helmify/pkg/format"
+	"github.com/hfuss/helmify/pkg/format"
 	"io"
 	"strings"
 	"text/template"
 
-	"github.com/arttor/helmify/pkg/processor"
+	"github.com/hfuss/helmify/pkg/processor"
 
-	"github.com/arttor/helmify/pkg/helmify"
-	yamlformat "github.com/arttor/helmify/pkg/yaml"
+	"github.com/hfuss/helmify/pkg/helmify"
+	yamlformat "github.com/hfuss/helmify/pkg/yaml"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"

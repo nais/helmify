@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	yamlformat "github.com/arttor/helmify/pkg/yaml"
+	yamlformat "github.com/hfuss/helmify/pkg/yaml"
 	"github.com/hfuss/helmify/pkg/helmify"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/runtime/schema"

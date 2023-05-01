@@ -8,8 +8,8 @@ import (
 
 	"github.com/hfuss/helmify/pkg/processor"
 
-	"github.com/arttor/helmify/pkg/helmify"
-	yamlformat "github.com/arttor/helmify/pkg/yaml"
+	"github.com/hfuss/helmify/pkg/helmify"
+	yamlformat "github.com/hfuss/helmify/pkg/yaml"
 	"github.com/iancoleman/strcase"
 	"github.com/pkg/errors"
 	corev1 "k8s.io/api/core/v1"
