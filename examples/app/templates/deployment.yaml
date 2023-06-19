@@ -1,24 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "app.fullname" . }}-myapp
+  name: {{ include "app.fullname" . }}-controller-manager
   labels:
-    app: myapp
+    control-plane: controller-manager
   {{- include "app.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.myapp.replicas }}
+  replicas: {{ .Values.controllerManager.replicas }}
   selector:
     matchLabels:
-      app: myapp
+      control-plane: controller-manager
     {{- include "app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: myapp
+        control-plane: controller-manager
       {{- include "app.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - args: {{- toYaml .Values.myapp.app.args | nindent 8 }}
+      - args: {{- toYaml .Values.controllerManager.kubeRbacProxy.args | nindent 8 }}
+        env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.controllerManager.kubeRbacProxy.image.repository }}:{{ .Values.controllerManager.kubeRbacProxy.image.tag
+          | default .Chart.AppVersion }}
+        name: kube-rbac-proxy
+        ports:
+        - containerPort: 8443
+          name: https
+        resources: {}
+      - args: {{- toYaml .Values.controllerManager.manager.args | nindent 8 }}
         command:
         - /manager
         env:
@@ -26,79 +37,71 @@ spec:
           valueFrom:
             secretKeyRef:
               key: VAR1
-              name: {{ include "app.fullname" . }}-my-secret-vars
+              name: {{ include "app.fullname" . }}-secret-vars
         - name: VAR2
+          value: {{ quote .Values.controllerManager.manager.env.var2 }}
+        - name: VAR3_MY_ENV
+          value: {{ quote .Values.controllerManager.manager.env.var3MyEnv }}
+        - name: VAR4
           valueFrom:
-            secretKeyRef:
-              key: VAR2
-              name: {{ include "app.fullname" . }}-my-secret-vars
+            configMapKeyRef:
+              key: VAR4
+              name: {{ include "app.fullname" . }}-configmap-vars
+        - name: VAR5
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: VAR6
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.cpu
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
-        image: {{ .Values.myapp.app.image.repository }}:{{ .Values.myapp.app.image.tag
+        image: {{ .Values.controllerManager.manager.image.repository }}:{{ .Values.controllerManager.manager.image.tag
           | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.controllerManager.manager.imagePullPolicy }}
         livenessProbe:
           httpGet:
             path: /healthz
             port: 8081
           initialDelaySeconds: 15
           periodSeconds: 20
-        name: app
+        name: manager
         readinessProbe:
           httpGet:
             path: /readyz
             port: 8081
           initialDelaySeconds: 5
           periodSeconds: 10
-        resources: {{- toYaml .Values.myapp.app.resources | nindent 10 }}
-        securityContext: {{- toYaml .Values.myapp.app.containerSecurityContext | nindent
-          10 }}
+        resources: {{- toYaml .Values.controllerManager.manager.resources | nindent 10
+          }}
+        securityContext: {{- toYaml .Values.controllerManager.manager.containerSecurityContext
+          | nindent 10 }}
         volumeMounts:
-        - mountPath: /my_config.properties
+        - mountPath: /controller_manager_config.yaml
           name: manager-config
-          subPath: my_config.properties
+          subPath: controller_manager_config.yaml
         - mountPath: /my.ca
           name: secret-volume
-        - mountPath: /etc/props
-          name: props
-        - mountPath: /usr/share/nginx/html
-          name: sample-pv-storage
-      - args: {{- toYaml .Values.myapp.proxySidecar.args | nindent 8 }}
-        env:
-        - name: KUBERNETES_CLUSTER_DOMAIN
-          value: {{ quote .Values.kubernetesClusterDomain }}
-        image: {{ .Values.myapp.proxySidecar.image.repository }}:{{ .Values.myapp.proxySidecar.image.tag
-          | default .Chart.AppVersion }}
-        name: proxy-sidecar
-        ports:
-        - containerPort: 8443
-          name: https
-        resources: {}
-      initContainers:
-      - command:
-        - /bin/sh
-        - -c
-        - echo Initializing container...
-        env:
-        - name: KUBERNETES_CLUSTER_DOMAIN
-          value: {{ quote .Values.kubernetesClusterDomain }}
-        image: {{ .Values.myapp.initContainer.image.repository }}:{{ .Values.myapp.initContainer.image.tag
-          | default .Chart.AppVersion }}
-        name: init-container
-        resources: {}
-      nodeSelector: {{- toYaml .Values.myapp.nodeSelector | nindent 8 }}
+      imagePullSecrets:
+      - name: {{ include "app.fullname" . }}-secret-registry-credentials
+      nodeSelector: {{- toYaml .Values.controllerManager.nodeSelector | nindent 8 }}
       securityContext:
         runAsNonRoot: true
+      serviceAccountName: {{ include "app.fullname" . }}-controller-manager
       terminationGracePeriodSeconds: 10
+      topologySpreadConstraints:
+      - matchLabelKeys:
+        - app
+        - pod-template-hash
+        maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
       volumes:
       - configMap:
-          name: {{ include "app.fullname" . }}-my-config
+          name: {{ include "app.fullname" . }}-manager-config
         name: manager-config
-      - configMap:
-          name: {{ include "app.fullname" . }}-my-config-props
-        name: props
       - name: secret-volume
         secret:
-          secretName: {{ include "app.fullname" . }}-my-secret-ca
-      - name: sample-pv-storage
-        persistentVolumeClaim:
-          claimName: {{ include "app.fullname" . }}-my-sample-pv-claim
+          secretName: {{ include "app.fullname" . }}-secret-ca
