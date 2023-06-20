@@ -3,9 +3,9 @@ package service
 import (
 	"testing"
 
-	"github.com/arttor/helmify/pkg/metadata"
+	"github.com/nais/helmify/pkg/metadata"
 
-	"github.com/arttor/helmify/internal"
+	"github.com/nais/helmify/internal"
 	"github.com/stretchr/testify/assert"
 )
 

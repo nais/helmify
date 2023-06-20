@@ -7,27 +7,27 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/arttor/helmify/pkg/config"
+	"github.com/nais/helmify/pkg/config"
 )
 
 const helpText = `Helmify parses kubernetes resources from std.in and converts it to a Helm chart.
 
-Example 1: 'kustomize build <kustomize_dir> | helmify mychart' 
+Example 1: 'kustomize build <kustomize_dir> | helmify mychart'
   - will create 'mychart' directory with Helm chart from kustomize output.
 
-Example 2: 'cat my-app.yaml | helmify mychart' 
+Example 2: 'cat my-app.yaml | helmify mychart'
   - will create 'mychart' directory with Helm chart from yaml file.
 
-Example 3: 'helmify -f ./test_data/dir  mychart' 
+Example 3: 'helmify -f ./test_data/dir  mychart'
   - will scan directory ./test_data/dir for files with k8s manifests and create 'mychart' directory with Helm chart.
 
-Example 4: 'helmify -f ./test_data/dir -r  mychart' 
+Example 4: 'helmify -f ./test_data/dir -r  mychart'
   - will scan directory ./test_data/dir recursively and  create 'mychart' directory with Helm chart.
 
-Example 5: 'helmify -f ./test_data/dir -f ./test_data/sample-app.yaml -f ./test_data/dir/another_dir  mychart' 
+Example 5: 'helmify -f ./test_data/dir -f ./test_data/sample-app.yaml -f ./test_data/dir/another_dir  mychart'
   - will scan provided multiple files and directories and  create 'mychart' directory with Helm chart.
 
-Example 6: 'awk 'FNR==1 && NR!=1  {print "---"}{print}' /my_directory/*.yaml | helmify mychart' 
+Example 6: 'awk 'FNR==1 && NR!=1  {print "---"}{print}' /my_directory/*.yaml | helmify mychart'
   - will create 'mychart' directory with Helm chart from all yaml files in my_directory directory.
 
 Usage:

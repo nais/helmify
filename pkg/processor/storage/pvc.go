@@ -1,10 +1,10 @@
 package storage
 
 import (
-	"github.com/arttor/helmify/pkg/helmify"
-	"github.com/arttor/helmify/pkg/processor"
-	yamlformat "github.com/arttor/helmify/pkg/yaml"
 	"github.com/iancoleman/strcase"
+	"github.com/nais/helmify/pkg/helmify"
+	"github.com/nais/helmify/pkg/processor"
+	yamlformat "github.com/nais/helmify/pkg/yaml"
 	"github.com/pkg/errors"
 	"io"
 	corev1 "k8s.io/api/core/v1"

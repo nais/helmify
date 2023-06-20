@@ -6,12 +6,12 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/arttor/helmify/pkg/processor/pod"
+	"github.com/nais/helmify/pkg/processor/pod"
 
-	"github.com/arttor/helmify/pkg/helmify"
-	"github.com/arttor/helmify/pkg/processor"
-	yamlformat "github.com/arttor/helmify/pkg/yaml"
 	"github.com/iancoleman/strcase"
+	"github.com/nais/helmify/pkg/helmify"
+	"github.com/nais/helmify/pkg/processor"
+	yamlformat "github.com/nais/helmify/pkg/yaml"
 	"github.com/pkg/errors"
 	appsv1 "k8s.io/api/apps/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"

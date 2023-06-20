@@ -2,9 +2,9 @@ package app
 
 import (
 	"context"
-	"github.com/arttor/helmify/pkg/file"
-	"github.com/arttor/helmify/pkg/processor/job"
-	"github.com/arttor/helmify/pkg/processor/statefulset"
+	"github.com/nais/helmify/pkg/file"
+	"github.com/nais/helmify/pkg/processor/job"
+	"github.com/nais/helmify/pkg/processor/statefulset"
 	"io"
 	"os"
 	"os/signal"
@@ -12,19 +12,19 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/arttor/helmify/pkg/config"
-	"github.com/arttor/helmify/pkg/decoder"
-	"github.com/arttor/helmify/pkg/helm"
-	"github.com/arttor/helmify/pkg/processor"
-	"github.com/arttor/helmify/pkg/processor/configmap"
-	"github.com/arttor/helmify/pkg/processor/crd"
-	"github.com/arttor/helmify/pkg/processor/daemonset"
-	"github.com/arttor/helmify/pkg/processor/deployment"
-	"github.com/arttor/helmify/pkg/processor/rbac"
-	"github.com/arttor/helmify/pkg/processor/secret"
-	"github.com/arttor/helmify/pkg/processor/service"
-	"github.com/arttor/helmify/pkg/processor/storage"
-	"github.com/arttor/helmify/pkg/processor/webhook"
+	"github.com/nais/helmify/pkg/config"
+	"github.com/nais/helmify/pkg/decoder"
+	"github.com/nais/helmify/pkg/helm"
+	"github.com/nais/helmify/pkg/processor"
+	"github.com/nais/helmify/pkg/processor/configmap"
+	"github.com/nais/helmify/pkg/processor/crd"
+	"github.com/nais/helmify/pkg/processor/daemonset"
+	"github.com/nais/helmify/pkg/processor/deployment"
+	"github.com/nais/helmify/pkg/processor/rbac"
+	"github.com/nais/helmify/pkg/processor/secret"
+	"github.com/nais/helmify/pkg/processor/service"
+	"github.com/nais/helmify/pkg/processor/storage"
+	"github.com/nais/helmify/pkg/processor/webhook"
 )
 
 // Start - application entrypoint for processing input to a Helm chart.

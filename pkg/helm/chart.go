@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/arttor/helmify/pkg/cluster"
-	"github.com/arttor/helmify/pkg/helmify"
+	"github.com/nais/helmify/pkg/cluster"
+	"github.com/nais/helmify/pkg/helmify"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 
